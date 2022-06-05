@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/eventListFragment">
+    <fragment
+        android:id="@+id/eventListFragment"
+        android:name="aj.dev.event.view.list.EventListFragment"
+        tools:layout="@layout/event_list_fragment"
+        android:label="EventListFragment">
+        <action
+            android:id="@+id/action_eventListFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="aj.dev.event.view.detail.EventDetailFragment"
+        android:label="EventDetailFragment" >
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>
