@@ -34,6 +34,39 @@ class CheckinFormDialog : DialogFragment() {
         setupBtClose()
         setupBtCheckIn()
         setupObserverLoad()
+        setupObserverErrors()
+        setupObserverCheckIn()
+    }
+
+    private fun setupObserverCheckIn() {
+        viewModel.checkInResult.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.btCheckin.isVisible = !it
+                binding.llForm.isVisible = !it
+                binding.tvCheckinMessage.isVisible = !it
+                viewModel.clearCheckInResult()
+            }
+        }
+    }
+
+    private fun setupObserverErrors() {
+        viewModel.errorService.observe(viewLifecycleOwner) {
+
+        }
+
+        viewModel.errorEmail.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.etEmail.error = it
+                viewModel.clearErrorEmail()
+            }
+        }
+
+        viewModel.errorName.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.etName.error = it
+                viewModel.clearErrorName()
+            }
+        }
     }
 
     private fun setupBtClose() {

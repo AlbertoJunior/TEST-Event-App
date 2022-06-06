@@ -1,9 +1,10 @@
 package aj.dev.event.view.list
 
 import aj.dev.event.R
-import aj.dev.event.data.model.Temperature
 import aj.dev.event.databinding.EventListFragmentBinding
+import aj.dev.event.view.DialogUtils
 import aj.dev.event.view.list.vm.EventListViewModel
+import aj.dev.event.view.list.vm.TemperatureListPresenter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class EventListFragment : Fragment() {
 
     private lateinit var binding: EventListFragmentBinding
-
     private val viewModel by activityViewModels<EventListViewModel>()
     private val navController by lazy { findNavController() }
 
@@ -67,14 +66,21 @@ class EventListFragment : Fragment() {
     private fun setupObserverError() {
         viewModel.error.observe(viewLifecycleOwner) {
             it?.let { description ->
-                showDialog("Operação Indisponível", description, "Ok")
+                DialogUtils.showDialog(
+                    requireContext(),
+                    getString(R.string.operate_unavailable),
+                    description,
+                    getString(R.string.ok)
+                ) { _, _ ->
+                    viewModel.clearError()
+                }
             }
         }
     }
 
     private fun setupAdapter() {
         val listener = object : OnEventItemClick {
-            override fun onEventItemClicked(item: Temperature) {
+            override fun onEventItemClicked(item: TemperatureListPresenter) {
                 viewModel.onItemClicked(item.id)
             }
         }
@@ -84,26 +90,9 @@ class EventListFragment : Fragment() {
 
         viewModel.events.observe(this.viewLifecycleOwner) {
             it?.let { events ->
+                binding.tvMessage.isVisible = it.isEmpty()
                 eventItemAdapter.submitList(events)
             }
         }
-    }
-
-    private fun showDialog(title: String, message: String, positiveButton: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { _, _ -> viewModel.clearError() }
-            .show()
-    }
-
-    private fun showInvalidItemDialog(item: Temperature) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(R.string.ivalid_item_title))
-            .setMessage(resources.getString(R.string.ivalid_item_message))
-            .setPositiveButton(
-                resources.getString(R.string.ivalid_item_button)
-            ) { _, _ -> print(item.description) }
-            .show()
     }
 }

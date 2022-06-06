@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">Event</string>
+    <string name="ok">OK</string>
 
     <!-- event list   -->
     <string name="ivalid_item_title">Item inválido</string>
     <string name="ivalid_item_message">Este item está indisponível no momento</string>
     <string name="ivalid_item_button">Voltar</string>
+    <string name="operate_unavailable">Operação Indisponível</string>
 
     <!-- event item  -->
     <string name="price_format">R$ %1$.2f</string>
+    <string name="price_format_simply">%1$.2f</string>
     <string name="price_format_long">Preço: <b>R$ %1$.2f</b></string>
+    <string name="people_confirmed_format">Confirmados: <b>R$ %1$d</b></string>
     <string name="date_format">Data: %1$s</string>
     <string name="lat_format">Latitude: %1$f</string>
     <string name="lon_format">Longitude: %1$f</string>
@@ -18,11 +22,11 @@
     <string name="back">Voltar</string>
     <string name="check_in">Check-in</string>
     <string name="location">Localização</string>
-    <string name="description">Descrição:</string>
-
+    <string name="description">Descrição</string>
+    <string name="error">Erro</string>
 
     <!-- event form checkin  -->
     <string name="confirm">Confirmar</string>
-    <string name="email_hint">email@...</string>
+    <string name="email_hint">email@company.com</string>
     <string name="name_hint">Nome</string>
 </resources>

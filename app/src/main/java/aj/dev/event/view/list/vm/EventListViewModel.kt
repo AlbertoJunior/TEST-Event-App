@@ -1,6 +1,5 @@
 package aj.dev.event.view.list.vm
 
-import aj.dev.event.data.model.Temperature
 import aj.dev.event.listener.LoadingHandlerListener
 import aj.dev.event.listener.NavigateHandlerListener
 import androidx.lifecycle.LiveData
@@ -16,8 +15,8 @@ class EventListViewModel @Inject constructor(private val eventsAPI: EventsListMe
     ViewModel(),
     NavigateHandlerListener, LoadingHandlerListener {
 
-    private val _events = MutableLiveData<List<Temperature>?>()
-    val events: LiveData<List<Temperature>?> = _events
+    private val _events = MutableLiveData<List<TemperatureListPresenter>?>()
+    val events: LiveData<List<TemperatureListPresenter>?> = _events
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
@@ -46,7 +45,7 @@ class EventListViewModel @Inject constructor(private val eventsAPI: EventsListMe
             0L
         }.also { id ->
             if (id == 0L) {
-                _error.value = "Detalhes do item indisponível"
+                _error.value = "Detalhes do evento indisponível"
             } else {
                 _navigate.value = id
             }
@@ -54,9 +53,7 @@ class EventListViewModel @Inject constructor(private val eventsAPI: EventsListMe
     }
 
     fun clearError() {
-        viewModelScope.launch {
-            _error.value = null
-        }
+        _error.value = null
     }
 
     override fun clearNavigate() {

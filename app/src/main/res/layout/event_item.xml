@@ -7,20 +7,20 @@
 
         <variable
             name="temperature"
-            type="aj.dev.event.data.model.Temperature" />
+            type="aj.dev.event.view.list.vm.TemperatureListPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:paddingHorizontal="4dp">
+        android:layout_marginVertical="@dimen/medium_margin"
+        android:paddingHorizontal="@dimen/small_margin">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
+            android:layout_marginVertical="@dimen/small_margin"
             android:text="@{temperature.title}"
             android:textColor="@color/teal_700"
             android:textSize="18sp"
@@ -29,31 +29,39 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Feira de adoção de animais na Redenção" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{@string/price_format(temperature.price)}"
+            android:layout_marginVertical="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:drawablePadding="@dimen/small_margin"
+            android:text="@{@string/price_format_simply(temperature.price)}"
             android:textColor="@color/teal_500"
             android:textSize="16sp"
+            app:drawableStartCompat="@drawable/ic_currency_brl"
+            app:drawableTint="@color/teal_700"
             app:layout_constraintEnd_toStartOf="@id/bt_details"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="R$29.99" />
+            tools:text="29.99" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
+            android:layout_marginVertical="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:drawablePadding="@dimen/small_margin"
+            android:text="@{temperature.date}"
             android:textColor="@color/teal_500"
             android:textSize="16sp"
-            android:text="@{@string/date_format(temperature.getDateFormated())}"
+            app:drawableStartCompat="@drawable/ic_calendar_star"
+            app:drawableTint="@color/teal_700"
+            app:layout_constraintEnd_toStartOf="@id/bt_details"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_price"
-            tools:text="Data: 25-01-2022" />
+            tools:text="25-01-2022" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_details"
@@ -64,13 +72,14 @@
             android:text="@string/details"
             android:textSize="12sp"
             app:icon="@drawable/ic_page_next"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_date"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_price" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="@dimen/small_margin"
             app:layout_constraintTop_toBottomOf="@id/bt_details" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

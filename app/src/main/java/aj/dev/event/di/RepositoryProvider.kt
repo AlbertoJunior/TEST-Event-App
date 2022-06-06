@@ -1,7 +1,7 @@
 package aj.dev.event.di
 
 import aj.dev.event.data.repository.EventRepository
-import aj.dev.event.view.detail.vm.EventsCheckinMethods
+import aj.dev.event.view.checkin.vm.EventsCheckinMethods
 import aj.dev.event.view.detail.vm.EventsDetailMethods
 import aj.dev.event.view.list.vm.EventsListMethods
 import dagger.Module

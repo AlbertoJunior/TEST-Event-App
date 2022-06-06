@@ -2,8 +2,8 @@ package aj.dev.event.view.detail
 
 import aj.dev.event.R
 import aj.dev.event.databinding.EventDetailFragmentBinding
+import aj.dev.event.view.DialogUtils
 import aj.dev.event.view.detail.vm.EventDetailViewModel
-import aj.dev.event.view.list.EventListFragmentDirections
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -52,7 +51,14 @@ class EventDetailFragment : Fragment() {
     private fun setupObserverError() {
         viewModel.error.observe(viewLifecycleOwner) {
             it?.let { error ->
-                showDialog("Erro", error, "OK")
+                DialogUtils.showDialog(
+                    requireContext(),
+                    getString(R.string.error),
+                    error,
+                    getString(R.string.ok)
+                ) { _, _ ->
+                    viewModel.clearError()
+                }
             }
         }
     }
@@ -80,7 +86,7 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun setupObserverEvent() {
-        viewModel.events.observe(viewLifecycleOwner) {
+        viewModel.event.observe(viewLifecycleOwner) {
             it?.let { event ->
                 setupImage(event.image)
                 setupBtCheckIn(event.id)
@@ -125,19 +131,10 @@ class EventDetailFragment : Fragment() {
             })
             .centerCrop()
             .error(R.drawable.img_404)
-            .placeholder(R.drawable.ic_image_search)
             .into(binding.ivImage)
     }
 
     private fun fetchEvent() {
         viewModel.fetchEvent(args.id)
-    }
-
-    private fun showDialog(title: String, message: String, positiveButton: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButton) { _, _ -> viewModel.clearError() }
-            .show()
     }
 }

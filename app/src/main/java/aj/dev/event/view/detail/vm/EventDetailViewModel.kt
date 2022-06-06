@@ -1,6 +1,5 @@
 package aj.dev.event.view.detail.vm
 
-import aj.dev.event.data.model.Temperature
 import aj.dev.event.listener.LoadingHandlerListener
 import aj.dev.event.listener.NavigateHandlerListener
 import androidx.lifecycle.LiveData
@@ -15,8 +14,8 @@ import javax.inject.Inject
 class EventDetailViewModel @Inject constructor(private val eventsAPI: EventsDetailMethods) :
     ViewModel(), LoadingHandlerListener, NavigateHandlerListener {
 
-    private val _events = MutableLiveData<Temperature?>()
-    val events: LiveData<Temperature?> = _events
+    private val _event = MutableLiveData<TemperatureDetailPresenter?>()
+    val event: LiveData<TemperatureDetailPresenter?> = _event
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
@@ -31,10 +30,10 @@ class EventDetailViewModel @Inject constructor(private val eventsAPI: EventsDeta
         viewModelScope.launch {
             _loadingShow.value = true
             try {
-                _events.value = eventsAPI.fetchEventDetail(id)
+                _event.value = eventsAPI.fetchEventDetail(id)
             } catch (e: Exception) {
                 _error.value = "Não foi possível buscar os detalhes do evento."
-                _events.value = null
+                _event.value = null
             }
             _loadingShow.value = false
         }

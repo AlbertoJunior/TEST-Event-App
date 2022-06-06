@@ -7,7 +7,7 @@
 
         <variable
             name="temperature"
-            type="aj.dev.event.data.model.Temperature" />
+            type="aj.dev.event.view.detail.vm.TemperatureDetailPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginVertical="4dp"
+                    android:layout_marginVertical="@dimen/small_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_image" />
@@ -56,108 +56,190 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp"
+                    android:padding="@dimen/medium_margin"
                     app:layout_constraintTop_toBottomOf="@id/divider">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
+                        android:layout_marginVertical="@dimen/small_margin"
                         android:text="@{temperature.title}"
+                        android:textAlignment="center"
                         android:textColor="@color/teal_700"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/title_size"
                         android:textStyle="bold"
                         tools:text="Titulo" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:text="@{@string/date_format(temperature.getDateFormated())}"
-                        android:textColor="@color/teal_500"
-                        android:textSize="16sp"
-                        tools:text="Data: 22-12-2022" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tv_location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:text="@string/location"
-                        android:textColor="@color/teal_500"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_date" />
-
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/ll_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="4dp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_location">
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="@dimen/small_margin"
+                            android:tint="@color/teal_700"
+                            app:srcCompat="@drawable/ic_calendar_star" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/date_format(temperature.date)}"
+                            android:textColor="@color/teal_500"
+                            android:textSize="@dimen/subtitle_size"
+                            tools:text="Data: 22-12-2022" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="@dimen/small_margin"
+                            android:tint="@color/teal_700"
+                            app:srcCompat="@drawable/ic_currency_brl" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/price_format_long(temperature.price)}"
+                            android:textColor="@color/teal_500"
+                            android:textSize="@dimen/subtitle_size"
+                            tools:text="Preço: R$ 29.99" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="@dimen/small_margin"
+                            android:tint="@color/teal_700"
+                            app:srcCompat="@drawable/ic_account_multiple_check" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_people_confirmed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{@string/people_confirmed_format(temperature.people.size())}"
+                            android:textColor="@color/teal_500"
+                            android:textSize="@dimen/subtitle_size"
+                            tools:text="Confirmados: 99" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_map"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="@dimen/small_margin"
+                            android:tint="@color/teal_700"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_map_marker" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/small_margin"
+                            android:text="@string/location"
+                            android:textColor="@color/teal_500"
+                            android:textSize="@dimen/subtitle_size"
+                            app:layout_constraintStart_toEndOf="@id/iv_map"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_lat"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_weight="1"
                             android:text="@{@string/lat_format(temperature.latitude)}"
+                            android:textAlignment="center"
                             android:textColor="@color/teal_500"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@id/md_divider2"
+                            app:layout_constraintStart_toStartOf="@id/tv_location"
+                            app:layout_constraintTop_toBottomOf="@id/tv_location"
                             tools:text="Latitude: 123123" />
 
                         <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/md_divider2"
                             android:layout_width="2dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginHorizontal="4dp" />
+                            android:layout_height="0dp"
+                            android:layout_marginHorizontal="@dimen/small_margin"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tv_lon"
+                            app:layout_constraintStart_toEndOf="@id/tv_lat"
+                            app:layout_constraintTop_toTopOf="@id/tv_lat" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_lon"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/small_margin"
                             android:text="@{@string/lon_format(temperature.longitude)}"
+                            android:textAlignment="center"
                             android:textColor="@color/teal_500"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/md_divider2"
+                            app:layout_constraintTop_toBottomOf="@id/tv_location"
                             tools:text="Longitude: 123123" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_margin="@dimen/small_margin"
+                            android:tint="@color/teal_700"
+                            app:srcCompat="@drawable/ic_sticker_text" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/description"
+                            android:textColor="@color/teal_700"
+                            android:textSize="@dimen/subtitle_size" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tv_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:text="@{@string/price_format_long(temperature.price)}"
-                        android:textColor="@color/teal_500"
-                        android:textSize="16sp"
-                        tools:text="Preço: R$ 29.99" />
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="4dp" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:text="@string/description"
-                        android:textColor="@color/teal_700"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:paddingBottom="40dp"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:layout_marginStart="40dp"
+                        android:paddingBottom="@dimen/ultra_margin"
                         android:text="@{temperature.description}"
                         android:textColor="@color/teal_500"
                         android:textSize="14sp" />
@@ -183,7 +265,7 @@
             android:id="@+id/bt_checkin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/medium_margin"
             android:enabled="false"
             android:text="@string/check_in"
             app:backgroundTint="@color/orange_500"

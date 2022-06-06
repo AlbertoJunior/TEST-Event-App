@@ -1,28 +1,32 @@
 package aj.dev.event.data.repository
 
-import aj.dev.event.data.model.Temperature
 import aj.dev.event.network.CheckInRequest
 import aj.dev.event.network.EventsAPI
-import aj.dev.event.view.detail.vm.EventsCheckinMethods
+import aj.dev.event.view.checkin.vm.EventsCheckinMethods
 import aj.dev.event.view.detail.vm.EventsDetailMethods
+import aj.dev.event.view.detail.vm.TemperatureDetailPresenter
 import aj.dev.event.view.list.vm.EventsListMethods
+import aj.dev.event.view.list.vm.TemperatureListPresenter
 import android.util.Log
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(private val eventsAPI: EventsAPI) : EventsListMethods,
     EventsDetailMethods, EventsCheckinMethods {
 
-    override suspend fun fetchEvents(): List<Temperature> {
+    override suspend fun fetchEvents(): List<TemperatureListPresenter> {
         return try {
-            eventsAPI.fetchEvents().toList()
+            eventsAPI.fetchEvents()
+                .map { EventConverterUtils.temperatureToTemperatureListPresenter(it) }
+                .toList()
         } catch (e: Exception) {
             listOf()
         }
     }
 
-    override suspend fun fetchEventDetail(id: Long): Temperature {
+    override suspend fun fetchEventDetail(id: Long): TemperatureDetailPresenter {
         return try {
-            eventsAPI.fetchEventsDetail(id)
+            val temperature = eventsAPI.fetchEventsDetail(id)
+            EventConverterUtils.temperatureToTemperatureDetailPresenter(temperature)
         } catch (e: Exception) {
             print(e.message)
             throw RuntimeException("Item não encontrado")
