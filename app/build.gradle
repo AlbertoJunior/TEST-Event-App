@@ -47,6 +47,7 @@ dependencies {
     def navigation = "2.4.2"
     def ktx = "2.4.1"
     def multidex_version = "2.0.1"
+    def glide = "4.13.1"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -57,7 +58,7 @@ dependencies {
 
     // dependency navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$ktx"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
     // dependency livedata and viewmodel
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$ktx"
@@ -70,8 +71,7 @@ dependencies {
     // network
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp"
-
+//    implementation "com.squareup.okhttp3:okhttp:$okhttp"
     implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
         force = true //API 19 support
     }
@@ -79,6 +79,10 @@ dependencies {
 
     // parser json
     implementation "com.google.code.gson:gson:$gson"
+
+    // image
+    implementation "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
 
     implementation "androidx.multidex:multidex:$multidex_version"
 

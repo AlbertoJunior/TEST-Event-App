@@ -1,7 +1,7 @@
-package aj.dev.event.vm
+package aj.dev.event.view.list.vm
 
 import aj.dev.event.data.model.Temperature
 
-interface EventsMethods {
+interface EventsListMethods {
     suspend fun fetchEvents(): List<Temperature>
 }

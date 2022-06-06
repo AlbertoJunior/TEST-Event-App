@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/eventListFragment">
+
     <fragment
         android:id="@+id/eventListFragment"
         android:name="aj.dev.event.view.list.EventListFragment"
-        tools:layout="@layout/event_list_fragment"
-        android:label="EventListFragment">
+        android:label="Eventos"
+        tools:layout="@layout/event_list_fragment">
         <action
             android:id="@+id/action_eventListFragment_to_eventDetailFragment"
             app:destination="@id/eventDetailFragment" />
@@ -17,10 +18,26 @@
     <fragment
         android:id="@+id/eventDetailFragment"
         android:name="aj.dev.event.view.detail.EventDetailFragment"
-        android:label="EventDetailFragment" >
+        android:label="Detalhes do Evento"
+        tools:layout="@layout/event_detail_fragment">
         <argument
             android:name="id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_eventDetailFragment_to_eventCheckinDialog"
+            app:destination="@id/eventCheckinDialog" />
     </fragment>
+
+    <dialog
+        android:id="@+id/eventCheckinDialog"
+        android:name="aj.dev.event.view.checkin.CheckinFormDialog"
+        android:label="Check-In"
+        tools:layout="@layout/event_checkin_dialog">
+
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </dialog>
 </navigation>

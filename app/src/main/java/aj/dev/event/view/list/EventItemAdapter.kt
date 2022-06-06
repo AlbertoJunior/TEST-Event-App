@@ -40,6 +40,7 @@ class EventItemAdapter(private val listener: OnEventItemClick) :
 
         fun bind(item: Temperature) {
             binding.temperature = item
+            binding.root.setOnClickListener { listener.onEventItemClicked(item) }
             binding.btDetails.setOnClickListener { listener.onEventItemClicked(item) }
         }
     }
