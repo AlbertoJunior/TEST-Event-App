@@ -4,5 +4,5 @@ import androidx.lifecycle.LiveData
 
 interface NavigateHandlerListener {
     fun clearNavigate()
-    val navigate : LiveData<Long?>
+    val navigate: LiveData<Long?>
 }

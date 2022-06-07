@@ -3,8 +3,8 @@ package aj.dev.event.view.list
 import aj.dev.event.R
 import aj.dev.event.databinding.EventListFragmentBinding
 import aj.dev.event.view.DialogUtils
-import aj.dev.event.view.list.vm.EventListViewModel
 import aj.dev.event.view.list.vm.EventListPresenter
+import aj.dev.event.view.list.vm.EventListViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

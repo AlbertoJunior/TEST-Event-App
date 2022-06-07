@@ -6,5 +6,5 @@ interface LoadingHandlerListener {
     fun clearLoading()
     fun showLoading()
     fun hideLoading()
-    val loading : LiveData<Boolean?>
+    val loading: LiveData<Boolean?>
 }

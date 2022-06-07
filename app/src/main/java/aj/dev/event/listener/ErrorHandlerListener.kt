@@ -4,5 +4,5 @@ import androidx.lifecycle.LiveData
 
 interface ErrorHandlerListener {
     fun clearError()
-    val error : LiveData<String?>
+    val error: LiveData<String?>
 }
