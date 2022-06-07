@@ -41,9 +41,10 @@ class CheckinFormDialog : DialogFragment() {
     private fun setupObserverCheckIn() {
         viewModel.checkInResult.observe(viewLifecycleOwner) {
             it?.let {
-                binding.btCheckin.isVisible = !it
-                binding.llForm.isVisible = !it
-                binding.tvCheckinMessage.isVisible = !it
+                binding.btCheckin.isVisible = false
+                binding.llForm.isVisible = false
+                binding.tvCheckinMessage.isVisible = it.isNotEmpty()
+                binding.tvCheckinMessage.text = it
                 viewModel.clearCheckInResult()
             }
         }
@@ -51,7 +52,11 @@ class CheckinFormDialog : DialogFragment() {
 
     private fun setupObserverErrors() {
         viewModel.errorService.observe(viewLifecycleOwner) {
-
+            it?.let {
+                binding.tvCheckinMessage.isVisible = it.isNotEmpty()
+                binding.tvCheckinMessage.text = it
+                viewModel.clearErrorService()
+            }
         }
 
         viewModel.errorEmail.observe(viewLifecycleOwner) {

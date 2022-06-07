@@ -1,7 +1,9 @@
 package aj.dev.event.view.detail.vm
 
+import aj.dev.event.R
 import aj.dev.event.listener.LoadingHandlerListener
 import aj.dev.event.listener.NavigateHandlerListener
+import aj.dev.event.listener.ProviderHandler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +13,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EventDetailViewModel @Inject constructor(private val eventsAPI: EventsDetailMethods) :
-    ViewModel(), LoadingHandlerListener, NavigateHandlerListener {
+class EventDetailViewModel @Inject constructor(
+    private val eventsAPI: EventsDetailMethods,
+    private val resource: ProviderHandler
+) : ViewModel(), LoadingHandlerListener, NavigateHandlerListener {
 
     private val _event = MutableLiveData<TemperatureDetailPresenter?>()
     val event: LiveData<TemperatureDetailPresenter?> = _event
@@ -32,7 +36,7 @@ class EventDetailViewModel @Inject constructor(private val eventsAPI: EventsDeta
             try {
                 _event.value = eventsAPI.fetchEventDetail(id)
             } catch (e: Exception) {
-                _error.value = "Não foi possível buscar os detalhes do evento."
+                _error.value = resource.getString(R.string.error_fetch_detail_event)
                 _event.value = null
             }
             _loadingShow.value = false
@@ -44,7 +48,7 @@ class EventDetailViewModel @Inject constructor(private val eventsAPI: EventsDeta
             try {
                 _navigate.value = it.toLong()
             } catch (e: NumberFormatException) {
-                _error.value = "Não foi possível solicitar o Check-In pare este evento."
+                _error.value = resource.getString(R.string.error_check_in_event)
             }
         }
     }

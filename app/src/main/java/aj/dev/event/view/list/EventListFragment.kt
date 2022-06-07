@@ -66,6 +66,10 @@ class EventListFragment : Fragment() {
     private fun setupObserverError() {
         viewModel.error.observe(viewLifecycleOwner) {
             it?.let { description ->
+
+                binding.tvMessage.isVisible = true
+                binding.tvMessage.text = description
+
                 DialogUtils.showDialog(
                     requireContext(),
                     getString(R.string.operate_unavailable),

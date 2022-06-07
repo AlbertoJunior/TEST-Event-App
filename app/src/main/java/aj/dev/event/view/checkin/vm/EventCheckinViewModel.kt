@@ -1,9 +1,11 @@
 package aj.dev.event.view.checkin.vm
 
-import aj.dev.event.data.model.Temperature
+import aj.dev.event.R
 import aj.dev.event.listener.LoadingHandlerListener
+import aj.dev.event.listener.ProviderHandler
 import aj.dev.event.view.checkin.exception.ValidateEmailException
 import aj.dev.event.view.checkin.exception.ValidateNameException
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,22 +15,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EventCheckinViewModel @Inject constructor(private val eventsAPI: EventsCheckinMethods) :
-    ViewModel(), LoadingHandlerListener {
+class EventCheckinViewModel @Inject constructor(
+    private val eventsAPI: EventsCheckinMethods,
+    private val resource: ProviderHandler
+) : ViewModel(), LoadingHandlerListener {
 
-    private val _events = MutableLiveData<Temperature?>()
-    val events: LiveData<Temperature?> = _events
-
-    private val _checkInResult = MutableLiveData<Boolean?>()
-    val checkInResult: LiveData<Boolean?> = _checkInResult
-
+    private val _checkInResult = MutableLiveData<String?>()
+    val checkInResult: LiveData<String?> = _checkInResult
     private val _errorService = MutableLiveData<String?>()
     val errorService: LiveData<String?> = _errorService
     private val _errorName = MutableLiveData<String?>()
     val errorName: LiveData<String?> = _errorName
     private val _errorEmail = MutableLiveData<String?>()
     val errorEmail: LiveData<String?> = _errorEmail
-
     private val _loading = MutableLiveData<Boolean?>()
     override val loading: LiveData<Boolean?> = _loading
 
@@ -39,25 +38,25 @@ class EventCheckinViewModel @Inject constructor(private val eventsAPI: EventsChe
                 val nameValidated = validateName(name)
                 val emailValidated = validateEmail(email)
                 eventsAPI.checkIn(id, nameValidated, emailValidated)
-                _checkInResult.value = true
+                _checkInResult.value = resource.getString(R.string.check_in_success)
             } catch (e: ValidateNameException) {
                 _errorName.value = e.message
             } catch (e: ValidateEmailException) {
                 _errorEmail.value = e.message
             } catch (e: Exception) {
-                _errorService.value = "Não foi possível fazer Check-In nesse evento."
+                _errorService.value = resource.getString(R.string.check_in_error_service)
             }
             _loading.value = false
         }
     }
 
     private fun validateEmail(email: String?): String {
-        val emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}".toRegex()
         email?.let {
-            if (it.isNotBlank() && it.isNotEmpty() && emailRegex.matches(email))
+            if (Patterns.EMAIL_ADDRESS.toRegex().matches(email))
                 return it
         }
-        throw ValidateEmailException("Email inválido")
+
+        throw ValidateEmailException(resource.getString(R.string.email_error))
     }
 
     private fun validateName(name: String?): String {
@@ -65,7 +64,7 @@ class EventCheckinViewModel @Inject constructor(private val eventsAPI: EventsChe
             if (it.isNotBlank() && it.isNotEmpty())
                 return it
         }
-        throw ValidateNameException("Nome inválido")
+        throw ValidateNameException(resource.getString(R.string.name_error))
     }
 
     fun clearErrorName() {
