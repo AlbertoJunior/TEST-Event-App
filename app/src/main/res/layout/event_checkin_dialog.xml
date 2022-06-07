@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/huge_margin"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ib_close"
@@ -44,7 +43,7 @@
         android:id="@+id/ll_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/medium_margin"
+        android:layout_margin="@dimen/medium_margin"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout

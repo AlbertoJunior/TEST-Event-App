@@ -5,7 +5,6 @@ import aj.dev.event.listener.LoadingHandlerListener
 import aj.dev.event.listener.ProviderHandler
 import aj.dev.event.view.checkin.exception.ValidateEmailException
 import aj.dev.event.view.checkin.exception.ValidateNameException
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +30,10 @@ class EventCheckinViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean?>()
     override val loading: LiveData<Boolean?> = _loading
 
+    companion object {
+        private val EMAIL_REGEX = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}".toRegex()
+    }
+
     fun checkIn(id: Long, name: String?, email: String?) {
         viewModelScope.launch {
             _loading.value = true
@@ -52,7 +55,7 @@ class EventCheckinViewModel @Inject constructor(
 
     private fun validateEmail(email: String?): String {
         email?.let {
-            if (Patterns.EMAIL_ADDRESS.toRegex().matches(email))
+            if (EMAIL_REGEX.matches(email))
                 return it
         }
 
