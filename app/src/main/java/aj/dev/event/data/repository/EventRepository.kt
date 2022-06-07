@@ -5,10 +5,10 @@ import aj.dev.event.listener.ProviderHandler
 import aj.dev.event.network.CheckInRequest
 import aj.dev.event.network.EventsAPI
 import aj.dev.event.view.checkin.vm.EventsCheckinMethods
+import aj.dev.event.view.detail.vm.EventDetailPresenter
 import aj.dev.event.view.detail.vm.EventsDetailMethods
-import aj.dev.event.view.detail.vm.TemperatureDetailPresenter
+import aj.dev.event.view.list.vm.EventListPresenter
 import aj.dev.event.view.list.vm.EventsListMethods
-import aj.dev.event.view.list.vm.TemperatureListPresenter
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(
@@ -16,20 +16,19 @@ class EventRepository @Inject constructor(
     private val resource: ProviderHandler
 ) : EventsListMethods, EventsDetailMethods, EventsCheckinMethods {
 
-    override suspend fun fetchEvents(): List<TemperatureListPresenter> {
+    override suspend fun fetchEvents(): List<EventListPresenter> {
         return try {
             eventsAPI.fetchEvents()
-                .map { EventConverterUtils.temperatureToTemperatureListPresenter(it) }
+                .map { EventConverterUtils.eventResponseToEventListPresenter(it) }
                 .toList()
         } catch (e: Exception) {
             throw RuntimeException(resource.getString(R.string.error_items_not_found))
         }
     }
 
-    override suspend fun fetchEventDetail(id: Long): TemperatureDetailPresenter {
+    override suspend fun fetchEventDetail(id: Long): EventDetailPresenter {
         return try {
-            val temperature = eventsAPI.fetchEventsDetail(id)
-            EventConverterUtils.temperatureToTemperatureDetailPresenter(temperature)
+            EventConverterUtils.eventResponseToEventDetailPresenter(eventsAPI.fetchEventsDetail(id))
         } catch (e: Exception) {
             throw RuntimeException(resource.getString(R.string.error_item_not_found))
         }

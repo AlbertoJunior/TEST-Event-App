@@ -18,8 +18,8 @@ class EventDetailViewModel @Inject constructor(
     private val resource: ProviderHandler
 ) : ViewModel(), LoadingHandlerListener, NavigateHandlerListener {
 
-    private val _event = MutableLiveData<TemperatureDetailPresenter?>()
-    val event: LiveData<TemperatureDetailPresenter?> = _event
+    private val _event = MutableLiveData<EventDetailPresenter?>()
+    val event: LiveData<EventDetailPresenter?> = _event
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error

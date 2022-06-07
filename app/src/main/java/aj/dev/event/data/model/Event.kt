@@ -2,7 +2,7 @@ package aj.dev.event.data.model
 
 import java.io.Serializable
 
-data class Temperature(
+data class Event(
     val people: List<People>? = emptyList(),
     val date: Long,
     val description: String,

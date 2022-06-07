@@ -1,7 +1,7 @@
 package aj.dev.event.view.list
 
-import aj.dev.event.view.list.vm.TemperatureListPresenter
+import aj.dev.event.view.list.vm.EventListPresenter
 
 interface OnEventItemClick {
-    fun onEventItemClicked(item: TemperatureListPresenter)
+    fun onEventItemClicked(item: EventListPresenter)
 }

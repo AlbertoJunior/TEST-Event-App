@@ -1,6 +1,6 @@
 package aj.dev.event.network
 
-import aj.dev.event.data.model.Temperature
+import aj.dev.event.data.model.Event
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -12,10 +12,10 @@ interface EventsAPI {
     }
 
     @GET("events")
-    suspend fun fetchEvents(): Array<Temperature>
+    suspend fun fetchEvents(): Array<Event>
 
     @GET("events/{id}")
-    suspend fun fetchEventsDetail(@Path("id") id: Long): Temperature
+    suspend fun fetchEventsDetail(@Path("id") id: Long): Event
 
     @POST("checkin")
     suspend fun checkIn(@Body request: CheckInRequest): Any?

@@ -18,8 +18,8 @@ class EventListViewModel @Inject constructor(
     private val resource: ProviderHandler
 ) : ViewModel(), NavigateHandlerListener, LoadingHandlerListener {
 
-    private val _events = MutableLiveData<List<TemperatureListPresenter>?>()
-    val events: LiveData<List<TemperatureListPresenter>?> = _events
+    private val _events = MutableLiveData<List<EventListPresenter>?>()
+    val events: LiveData<List<EventListPresenter>?> = _events
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error

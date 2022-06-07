@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="temperature"
-            type="aj.dev.event.view.detail.vm.TemperatureDetailPresenter" />
+            name="event"
+            type="aj.dev.event.view.detail.vm.EventDetailPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/small_margin"
-                        android:text="@{temperature.title}"
+                        android:text="@{event.title}"
                         android:textAlignment="center"
                         android:textColor="@color/teal_700"
                         android:textSize="@dimen/title_size"
@@ -89,7 +89,7 @@
                             android:id="@+id/tv_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/date_format(temperature.date)}"
+                            android:text="@{@string/date_format(event.date)}"
                             android:textColor="@color/teal_500"
                             android:textSize="@dimen/subtitle_size"
                             tools:text="Data: 22-12-2022" />
@@ -114,7 +114,7 @@
                             android:id="@+id/tv_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/price_format_long(temperature.price)}"
+                            android:text="@{@string/price_format_long(event.price)}"
                             android:textColor="@color/teal_500"
                             android:textSize="@dimen/subtitle_size"
                             tools:text="Preço: R$ 29.99" />
@@ -138,7 +138,7 @@
                             android:id="@+id/tv_people_confirmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/people_confirmed_format(temperature.people.size())}"
+                            android:text="@{@string/people_confirmed_format(event.people.size())}"
                             android:textColor="@color/teal_500"
                             android:textSize="@dimen/subtitle_size"
                             tools:text="Confirmados: 99" />
@@ -176,7 +176,7 @@
                             android:id="@+id/tv_lat"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/lat_format(temperature.latitude)}"
+                            android:text="@{@string/lat_format(event.latitude)}"
                             android:textAlignment="center"
                             android:textColor="@color/teal_500"
                             android:textSize="12sp"
@@ -200,7 +200,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/small_margin"
-                            android:text="@{@string/lon_format(temperature.longitude)}"
+                            android:text="@{@string/lon_format(event.longitude)}"
                             android:textAlignment="center"
                             android:textColor="@color/teal_500"
                             android:textSize="12sp"
@@ -240,7 +240,7 @@
                         android:layout_marginVertical="@dimen/small_margin"
                         android:layout_marginStart="40dp"
                         android:paddingBottom="@dimen/ultra_margin"
-                        android:text="@{temperature.description}"
+                        android:text="@{event.description}"
                         android:textColor="@color/teal_500"
                         android:textSize="14sp" />
 

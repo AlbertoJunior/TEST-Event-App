@@ -2,7 +2,7 @@ package aj.dev.event.view.detail.vm
 
 import aj.dev.event.data.model.People
 
-data class TemperatureDetailPresenter(
+data class EventDetailPresenter(
     val id: String,
     val people: List<People>,
     val title: String,

@@ -4,7 +4,7 @@ import aj.dev.event.R
 import aj.dev.event.databinding.EventListFragmentBinding
 import aj.dev.event.view.DialogUtils
 import aj.dev.event.view.list.vm.EventListViewModel
-import aj.dev.event.view.list.vm.TemperatureListPresenter
+import aj.dev.event.view.list.vm.EventListPresenter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -84,7 +84,7 @@ class EventListFragment : Fragment() {
 
     private fun setupAdapter() {
         val listener = object : OnEventItemClick {
-            override fun onEventItemClicked(item: TemperatureListPresenter) {
+            override fun onEventItemClicked(item: EventListPresenter) {
                 viewModel.onItemClicked(item.id)
             }
         }

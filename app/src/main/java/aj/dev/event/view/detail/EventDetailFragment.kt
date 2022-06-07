@@ -90,7 +90,7 @@ class EventDetailFragment : Fragment() {
             it?.let { event ->
                 setupImage(event.image)
                 setupBtCheckIn(event.id)
-                binding.temperature = event
+                binding.event = event
             }
         }
     }

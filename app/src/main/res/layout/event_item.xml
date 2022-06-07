@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="temperature"
-            type="aj.dev.event.view.list.vm.TemperatureListPresenter" />
+            name="event"
+            type="aj.dev.event.view.list.vm.EventListPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/small_margin"
-            android:text="@{temperature.title}"
+            android:text="@{event.title}"
             android:textColor="@color/teal_700"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -37,7 +37,7 @@
             android:layout_marginVertical="@dimen/small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
             android:drawablePadding="@dimen/small_margin"
-            android:text="@{@string/price_format_simply(temperature.price)}"
+            android:text="@{@string/price_format_simply(event.price)}"
             android:textColor="@color/teal_500"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_currency_brl"
@@ -54,7 +54,7 @@
             android:layout_marginVertical="@dimen/small_margin"
             android:layout_marginEnd="@dimen/medium_margin"
             android:drawablePadding="@dimen/small_margin"
-            android:text="@{temperature.date}"
+            android:text="@{event.date}"
             android:textColor="@color/teal_500"
             android:textSize="16sp"
             app:drawableStartCompat="@drawable/ic_calendar_star"
