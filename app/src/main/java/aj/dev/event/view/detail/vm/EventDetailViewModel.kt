@@ -24,32 +24,31 @@ class EventDetailViewModel @Inject constructor(
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    private val _loadingShow = MutableLiveData<Boolean?>()
-    override val loading: LiveData<Boolean?> = _loadingShow
+    private val _loading = MutableLiveData<Boolean?>()
+    override val loading: LiveData<Boolean?> = _loading
 
     private val _navigate = MutableLiveData<Long?>()
     override val navigate: LiveData<Long?> = _navigate
 
     fun fetchEvent(id: Long) {
         viewModelScope.launch {
-            _loadingShow.value = true
+            _loading.value = true
             try {
                 _event.value = eventsAPI.fetchEventDetail(id)
             } catch (e: Exception) {
                 _error.value = resource.getString(R.string.error_fetch_detail_event)
                 _event.value = null
             }
-            _loadingShow.value = false
+            _loading.value = false
         }
     }
 
     fun callCheckIn(id: String?) {
-        id?.let {
-            try {
-                _navigate.value = it.toLong()
-            } catch (e: NumberFormatException) {
-                _error.value = resource.getString(R.string.error_check_in_event)
-            }
+        val validateId = id ?: ""
+        try {
+            _navigate.value = validateId.toLong()
+        } catch (e: NumberFormatException) {
+            _error.value = resource.getString(R.string.error_check_in_event)
         }
     }
 
@@ -58,15 +57,15 @@ class EventDetailViewModel @Inject constructor(
     }
 
     override fun clearLoading() {
-        _loadingShow.value = null
+        _loading.value = null
     }
 
     override fun showLoading() {
-        _loadingShow.value = true
+        _loading.value = true
     }
 
     override fun hideLoading() {
-        _loadingShow.value = false
+        _loading.value = false
     }
 
     override fun clearNavigate() {
