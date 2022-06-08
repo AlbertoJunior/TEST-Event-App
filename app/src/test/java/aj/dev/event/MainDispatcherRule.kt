@@ -1,4 +1,4 @@
-package aj.dev.event.view.checkin.vm
+package aj.dev.event
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

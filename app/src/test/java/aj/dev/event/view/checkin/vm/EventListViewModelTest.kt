@@ -1,5 +1,6 @@
 package aj.dev.event.view.checkin.vm
 
+import aj.dev.event.MainDispatcherRule
 import aj.dev.event.R
 import aj.dev.event.listener.ProviderHandler
 import aj.dev.event.view.list.vm.EventListPresenter
