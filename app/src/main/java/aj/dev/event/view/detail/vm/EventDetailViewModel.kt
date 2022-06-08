@@ -44,9 +44,8 @@ class EventDetailViewModel @Inject constructor(
     }
 
     fun callCheckIn(id: String?) {
-        val validateId = id ?: ""
         try {
-            _navigate.value = validateId.toLong()
+            _navigate.value = (id ?: "").toLong()
         } catch (e: NumberFormatException) {
             _error.value = resource.getString(R.string.error_check_in_event)
         }

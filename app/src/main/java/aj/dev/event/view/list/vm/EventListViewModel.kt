@@ -32,18 +32,20 @@ class EventListViewModel @Inject constructor(
 
     fun fetchEvents() {
         viewModelScope.launch {
+            _loading.value = true
             try {
                 _events.value = eventsAPI.fetchEvents()
             } catch (e: Exception) {
                 _error.value = resource.getString(R.string.error_fetch_events)
                 _events.value = null
             }
+            _loading.value = false
         }
     }
 
     fun onItemClicked(itemId: String?) {
         try {
-            itemId?.toLong()
+            (itemId ?: "").toLong()
         } catch (e: Exception) {
             0L
         }.also { id ->
