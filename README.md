@@ -33,15 +33,15 @@ Creating a App to list and study.
 
 # Images:
 
-![Screen: List](imgs/list.png)
+<img src="imgs/list.png" width="265" height="590"> <img src="imgs/list.png" width="265" height="590">
 
-![Screen: Detail](imgs/detail_1.png)
+<img src="imgs/detail_1.png" width="265" height="590"> <img src="imgs/detail_1.png" width="265" height="590">
 
-![Screen: Detail](imgs/detail_2.png)
+<img src="imgs/detail_2.png" width="265" height="590"> <img src="imgs/detail_2.png" width="265" height="590">
 
-![Screen: Check-In](imgs/check_in.png)
+<img src="imgs/check_in.png" width="265" height="590"> <img src="imgs/check_in.png" width="265" height="590">
 
-![Screen: Check-In](imgs/check_in_success.png)
+<img src="imgs/check_in_success.png" width="265" height="590"> <img src="imgs/check_in_success.png" width="265" height="590">
 
 # API Rest:
 
