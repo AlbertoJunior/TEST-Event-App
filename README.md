@@ -33,7 +33,15 @@ Creating a App to list and study.
 
 # Images:
 
-![Screen: List all](imgs/list_all.png)
+![Screen: List](imgs/list.png)
+
+![Screen: Detail](imgs/detail_1.png)
+
+![Screen: Detail](imgs/detail_2.png)
+
+![Screen: Check-In](imgs/check_in.png)
+
+![Screen: Check-In](imgs/check_in_success.png)
 
 # API Rest:
 
