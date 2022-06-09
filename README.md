@@ -33,7 +33,11 @@ Creating a App to list and study.
 
 # Images:
 
-![Screen: List all](imgs/list_all.png)
+<img src="imgs/list.png" width="400" height="711"> <img src="imgs/detail_1.png" width="400" height="711">
+
+<img src="imgs/detail_2.png" width="400" height="711"> <img src="imgs/check_in.png" width="400" height="711">
+
+<img src="imgs/check_in_success.png" width="400" height="711">
 
 # API Rest:
 
